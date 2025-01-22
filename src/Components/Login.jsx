@@ -28,11 +28,15 @@ const Login = () => {
                 await createUserWithEmailAndPassword(auth, correo, contrasena);
                 alert("Cuenta creada exitosamente.");
             } catch (error) {
+                console.log(error.code)
                 if (error.code === "auth/email-already-in-use") {
                     alert("El correo ya está registrado. Intenta iniciar sesión.");
                 } else if (error.code === "auth/weak-password") {
                     alert("La contraseña debe tener al menos 8 caracteres.");
-                } else {
+                } else if (error.code === "auth/missing-password") {
+                    alert("La contrasena no puede estar en blanco.");
+                }
+                else {
                     alert("Ocurrió un error: " + error.message);
                 }
             }
@@ -42,7 +46,8 @@ const Login = () => {
                 await signInWithEmailAndPassword(auth, correo, contrasena);
                // alert("Inicio de sesión exitoso.");
             } catch (error) {
-                if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password" || error.code === "auth/invalid-credential") {
+                console.log(error.code)
+                if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password" || error.code === "auth/invalid-credential" || error.code=== "auth/missing-password") {
                     alert("El correo o la contraseña no son correctos.");
                 } else {
                     alert("Ocurrió un error: " + error.message);
