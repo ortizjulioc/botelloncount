@@ -40,9 +40,9 @@ const Login = () => {
             // Inicio de sesión
             try {
                 await signInWithEmailAndPassword(auth, correo, contrasena);
-                alert("Inicio de sesión exitoso.");
+               // alert("Inicio de sesión exitoso.");
             } catch (error) {
-                if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
+                if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password" || error.code === "auth/invalid-credential") {
                     alert("El correo o la contraseña no son correctos.");
                 } else {
                     alert("Ocurrió un error: " + error.message);
@@ -53,6 +53,10 @@ const Login = () => {
 
     return (
         <div className="container">
+            {/* Header con estilo */}
+            <header className="header">
+                <h1 className="header-title">BotellonCount</h1>
+            </header>
             <div className="row">
                 <div className="col-md-4">
                     <div className="padre">
